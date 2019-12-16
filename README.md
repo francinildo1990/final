@@ -5,6 +5,8 @@ Sistema de segurança para Equipamentos Elétricos
 
 ### O presente projeto tem como objetivo monitorar os valores de corrente de determinado equipamento elétrico protegendo o mesmo de sobrecarga de corrente.
 
+![GitHub Logo](imagens/SensorCorrente.JPG )
+
 
 
 
