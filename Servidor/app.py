@@ -1,3 +1,4 @@
+
 import json
 
 from flask import Flask, render_template, redirect, request, jsonify
@@ -12,7 +13,7 @@ dados = ""
 
 @app.route("/")
 def rota_inicial():
-    return "Oi Flask!!"
+      return render_template(“index.html”)
     
 
 if __name__ == "__main__":
