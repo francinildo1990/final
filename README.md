@@ -19,7 +19,9 @@ Sistema de segurança para Equipamentos Elétricos
  
 ![GitHub Logo](imagens/SensorCorrente.png )
 
-![GitHub Logo](imagens/ESP8266.png )
+#### Foi utilizado um ESP8266 tem tem a vantangem de conter um módulo WIFI capaz de se comunicar com uma rede web.
+
+![GitHub Logo](imagens/ESP8266.jpeg )
 
 
 
