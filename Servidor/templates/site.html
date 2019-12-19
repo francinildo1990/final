@@ -1,0 +1,125 @@
+<!DOCTYPE html>  
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>MedidorDeCorrente</title>
+
+    <link rel="stylesheet" 
+     href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <meta name="viewport"content="width=device-width, initial-scale=1">
+ 
+</head>
+
+
+<body>
+       
+                 <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Projeto Medidor de Corrente</a>
+                        </nav>
+                   
+
+                        <div class="card text-center">
+                            <div class="card-header">EQUIPAMENTO 1</div>
+                            
+                              <div class="card-body">        
+                                  
+                                    <h5 class="card-text"> Corrente Elétrica  </h5>
+                                    
+                                    <h2 class="card-text" id="corrente_1"> 0 </h2>
+                                    <br>
+                                    <h5 class="card-text" id="status_1">Desligado</h5>
+         
+                                <input class = "btn btn-primary"
+                                 type="button" 
+                                 onclick = "ligarEquipamento1()" 
+                                 value="Ligar"/>
+                                            
+                                <input class = "btn btn-danger" 
+                                type="button" 
+                                onclick = "desligarEquipamento1()" 
+                                value="Desligar"/>
+                                </div>
+                                </div>
+
+
+                                
+                                <div class="card text-center">
+                                        <div class="card-header">EQUIPAMENTO 2</div>
+                                        
+                                          <div class="card-body">      
+
+                                                <h5 class="card-text">Corrente Elétrica </h5>
+                                                <h5 class="card-text" id="corrente_2"> 0 </h5> 
+                                                <br>       
+                                                <h5 class="card-text" id="status_2">Desligado</h5>
+
+                                            <input class = "btn btn-primary" 
+                                            type="button" 
+                                            onclick = "ligarEquipamento2()" 
+                                            value="Ligar"/>
+                                                        
+                                            <input class = "btn btn-danger" 
+                                            type="button" 
+                                            onclick = "desligarEquipamento2()" 
+                                            value="Desligar"/>
+                                            </div>
+                                            </div>
+
+                                            <script> 
+
+                                            var equipamento_1 = document.getElementById('status_1')
+                                            var btn_1 = document.getElementById('corrente_1')
+                                            
+
+                                            function ligarEquipamento1(){
+                                                equipamento_1.innerHTML="Ligado"
+                                                btn_1.innerHTML="1"
+                                            }
+
+                                            function desligarEquipamento1(){
+                                                equipamento_1.innerHTML="Desligado"
+                                                btn_1.innerHTML="0"
+                                            }
+                                            
+                                            </script>
+                                 
+                                        <script> 
+
+                                        var equipamento_2 = document.getElementById('status_2')
+                                        var btn_2 = document.getElementById('corrente_2')
+
+                                        function ligarEquipamento2(){
+                                            equipamento_2.innerHTML="Ligado"
+                                            btn_2.innerHTML="1"
+                                        }
+
+                                        function desligarEquipamento2(){
+                                            equipamento_2.innerHTML="Desligado"
+                                            btn_2.innerHTML="0"
+                                        }
+                                        
+                                        </script>
+                                        
+            
+<script>
+
+    var repetir = setInterval(pegarDados(),1000);
+    function pegarDados(){
+        fetch("https://sensorcorrente.herokuapp.com/download")
+        .then(dados => dados.json())
+        .then(json => { 
+            var h2 = document.getElementById("corrente_1")
+            h2.innerHTML = json["TEMP"]
+
+         })
+    }
+</script>
+
+</body>
+</html>
+
