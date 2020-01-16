@@ -13,11 +13,13 @@ Sistema de segurança para Equipamentos Elétricos
  #### -1 modúlo NodeMCU
  #### -Fios
  
- Hub Logo](imagens/.png )
+
  
  #### O sensor de corrente não invasivo utilizado nesse projeto tem a capacidade de medir corrente de até 100 A
  
-![GitHub Logo](imagens/SensorCorrente.png )
+ #### Os valores dos sensores serão enviados para uma aplicação criada no QT CREATOR  e um página web.
+ 
+ 
 
 #### Foi utilizado um ESP8266 tem tem a vantangem de conter um módulo WIFI capaz de se comunicar com uma rede web.
 
