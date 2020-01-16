@@ -29,14 +29,14 @@ Sistema de segurança para Equipamentos Elétricos
  ![GitHub Logo](imagens/APK_ESTATISTICAS.JPG )
 ####  Uma das maiores vantangens é o monitoramento a distância feito a parti do navergador de qualquer lugar do mundo.
 
-![GitHub Logo](imagens/.JPG )
+![GitHub Logo](imagens/HTML.JPG )
  
  
  #### A lógica da aplicação foi criada na IDE do arduino onde foram desenvolvidos 3 arquivos, um arquivo sendo o programa principal, um contendo o cabeçario também conhecido como biblioteca e por último as implementações da biblioteca.
  
  ![GitHub Logo](imagens/ARDUINO.JPG )
  
-#### Foi utilizado um ESP8266 tem tem a vantangem de conter um módulo WIFI capaz de se comunicar com uma rede web.
+####  Utilizamos o NodeMCU ESP8266 que tem a vantangem de conter um módulo WIFI capaz de se comunicar com uma rede web.
 
 ![GitHub Logo](imagens/ESP8266.jpeg )
 
