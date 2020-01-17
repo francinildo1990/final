@@ -1,16 +1,28 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+
+
 {
     ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
+    for(auto p : QSerialPortInfo::availablePorts()){
+              ui->comboBox->addItem(p.portName());
+      }
+    connect(&serial,
+              SIGNAL(readyRead()),
+              this,
+              SLOT(dadosRecebidos()));
+
     delete ui;
 }
 
@@ -88,4 +100,27 @@ void MainWindow::on_Tabela_cellDoubleClicked(int row, int column)
        if(column == 1){
                QMessageBox::warning(this, "Alerta", "Você não pode alterar cadastro!");
                }
+}
+
+void MainWindow::on_CONECTAR_clicked()
+{
+    serial.setPortName(ui->comboBox->currentText());
+     serial.setBaudRate(115200);
+
+     if (serial.open(QIODevice::ReadWrite)){
+         ui->status->setText("Status: Conectado");
+     }
+
+}
+
+void MainWindow::dadosRecebidos()
+{
+
+   auto data = serial.readAll();
+   auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
+  // if( json.contains("CORRENTE") ){
+
+         //ui->LabelCorrente1->setText(json["CORRENTE"].toString());
+
+  //}
 }

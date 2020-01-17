@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>547</height>
+    <width>435</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>361</width>
-      <height>511</height>
+      <x>30</x>
+      <y>20</y>
+      <width>391</width>
+      <height>641</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -342,6 +342,93 @@ background-color: rgb(204, 204, 204);</string>
        <string/>
       </property>
      </widget>
+     <widget class="QPushButton" name="CONECTAR">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>530</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CONECTAR</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="status">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>450</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>470</y>
+        <width>241</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="styleSheet">
+          <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Porta</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox">
+         <item>
+          <property name="text">
+           <string>ttyUSB0 : 1a86</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>ttyACM0 : Arduino www.arduino.cc</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>500</y>
+        <width>241</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QLabel" name="label_10">
+         <property name="styleSheet">
+          <string notr="true">font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+         </property>
+         <property name="text">
+          <string>velocidade</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -408,7 +495,7 @@ background-color: rgb(204, 204, 204);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>388</width>
+     <width>435</width>
      <height>21</height>
     </rect>
    </property>

@@ -1,3 +1,4 @@
+
 import json
 
 from flask import Flask, render_template, redirect, request, jsonify
@@ -12,7 +13,19 @@ dados = ""
 
 @app.route("/")
 def rota_inicial():
-    return render_template(“index.html”)
+      return render_template(“site.html”)
+
+@app.route(“/upload”, methods = [“POST”]
+def rota_upload():
+	global dados
+	dados = request.get_json()
+	return “200”
+
+      @app.route("/download", methods = ["GET"])
+def rota_download():
+   global dados
+   return jsonify(dados)
+
 
     
 

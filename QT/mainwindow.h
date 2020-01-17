@@ -15,6 +15,11 @@
 #include <QFile>
 #include <QStringList>
 
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -22,6 +27,9 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    QSerialPort serial;
+
+
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -36,6 +44,9 @@ private slots:
 
     void on_Tabela_cellDoubleClicked(int row, int column);
 
+    void on_CONECTAR_clicked();
+
+    void dadosRecebidos();
 private:
     Ui::MainWindow *ui;
 
