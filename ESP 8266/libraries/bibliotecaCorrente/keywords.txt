@@ -1,0 +1,4 @@
+corrente	KEYWORD1
+SensorCorrente  KEYWORD2
+show	        KEYWORD3
+teste		KEYWORD4
