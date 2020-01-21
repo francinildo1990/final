@@ -35,6 +35,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
 private slots:
     void on_ButtonOnOff_1_clicked();
 
@@ -47,6 +49,10 @@ private slots:
     void on_CONECTAR_clicked();
 
     void dadosRecebidos();
+
+    signals:
+
+    void  readyRead();
 private:
     Ui::MainWindow *ui;
 
@@ -56,5 +62,7 @@ private:
     void inserirNaTabela(Dados a, int linha);
 
     Dados corrente;
+
+
 };
 #endif // MAINWINDOW_H

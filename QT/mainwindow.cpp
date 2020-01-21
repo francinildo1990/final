@@ -12,6 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+
     connect(&serial,
               SIGNAL(readyRead()),
               this,
@@ -34,36 +36,36 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_ButtonOnOff_1_clicked()
 {
-       float dados1;
-       float dados2;
 
-
-    dados1 = ui-> sensor->text().toFloat();
-    dados2 = ui-> labelCorrente2->text().toFloat();
-
-    if(dados1 < 0 || dados2 < 0){  //Verificação dos dados
-                qDebug()<<"Dado Inválido"<<endl;
-                QMessageBox::warning(this,"Alerta","Dado inválido");
-            }
-
-   else
-    {
-    corrente.setCorrente1(ui->sensor->text().toFloat());
-    corrente.setCorrente2(ui->labelCorrente2->text().toFloat());
-
-    int quantidade_linhas = ui->Tabela->rowCount();
-    ui->Tabela->insertRow(quantidade_linhas);
-    inserirNaTabela(corrente,quantidade_linhas);
-    equipamento.inserirCadastro(corrente);
-    atualizarEstatisticas();
-
-    }
 
 }
 
 void MainWindow::inserirNaTabela(Dados a, int linha){
 
+    float dados1;
+    float dados2;
 
+
+ dados1 = ui-> sensor->text().toFloat();
+ dados2 = ui-> labelCorrente2->text().toFloat();
+
+ if(dados1 < 0 || dados2 < 0){  //Verificação dos dados
+             qDebug()<<"Dado Inválido"<<endl;
+             QMessageBox::warning(this,"Alerta","Dado inválido");
+         }
+
+else
+ {
+ corrente.setCorrente1(ui->sensor->text().toFloat());
+ corrente.setCorrente2(ui->labelCorrente2->text().toFloat());
+
+ int quantidade_linhas = ui->Tabela->rowCount();
+ ui->Tabela->insertRow(quantidade_linhas);
+ inserirNaTabela(corrente,quantidade_linhas);
+ equipamento.inserirCadastro(corrente);
+ atualizarEstatisticas();
+
+ }
     ui->Tabela->setItem(linha,0,new QTableWidgetItem(QString::number(a.getCorrente1())));
     ui->Tabela->setItem(linha,1,new QTableWidgetItem(QString::number(a.getCorrente2())));
 }

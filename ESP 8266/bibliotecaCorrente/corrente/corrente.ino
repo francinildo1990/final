@@ -10,23 +10,14 @@
 #define SENSOR A0  // Pino para a leitura do sensor
 #define CALIBRACAO 9.0909090909 // Calibração do sensor
 
-const String CORRENTE = "\"CORRENTE\":";
-const String RELE = "\"RELE\":";
-
 
 float Irms ;
 int PINO = D6;
 int DESLIGADO = 0;
+
 const int capacity = JSON_OBJECT_SIZE(5);
 StaticJsonDocument<capacity> doc;
 
-String JSON_CORRENTE(){ // 
- int corrente = Irms;
- 
-    return "{" +
-      CORRENTE + String(corrente) +
-      "}";
-}
 
 const char* SSID = "Liborio Home";
 const char* PASS = "6A3040305F63A633E37233";
@@ -39,20 +30,20 @@ void setup() {
 
   pinMode(PINO, OUTPUT);
   Calcular_Corrente.current(SENSOR, CALIBRACAO); // função da classe EnergyMonitor 
-    Serial.begin(115200);
+   Serial.begin(9600);
 }
 
 void loop() {
 
    Irms =  Calcular_Corrente.calcIrms(1480);   // Calcula o valor da Corrente 
-   Serial.print(JSON_CORRENTE());
+   
 
     serializeJson(doc,Serial);
 
     if( Serial.available() > 0 ){
       
    deserializeJson(doc,Serial);
-   Serial.print(JSON_CORRENTE());
+   
    
     }
  delay(1000);                      
