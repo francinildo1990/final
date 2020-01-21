@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
+
     connect(&serial,
               SIGNAL(readyRead()),
               this,
@@ -22,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     for(auto p : QSerialPortInfo::availablePorts()){
               ui->comboBox->addItem(p.portName());
       }
+
 
     for(auto& item : QSerialPortInfo::standardBaudRates())
            ui->comboBox_2->addItem(QString::number(item) );
@@ -36,11 +38,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_ButtonOnOff_1_clicked()
 {
-
-
-}
-
-void MainWindow::inserirNaTabela(Dados a, int linha){
 
     float dados1;
     float dados2;
@@ -66,6 +63,11 @@ else
  atualizarEstatisticas();
 
  }
+}
+
+void MainWindow::inserirNaTabela(Dados a, int linha){
+
+
     ui->Tabela->setItem(linha,0,new QTableWidgetItem(QString::number(a.getCorrente1())));
     ui->Tabela->setItem(linha,1,new QTableWidgetItem(QString::number(a.getCorrente2())));
 }
@@ -116,6 +118,7 @@ void MainWindow::on_CONECTAR_clicked()
 
      if (serial.open(QIODevice::ReadWrite)){
          ui->status->setText("Status: Conectado");
+         dadosRecebidos();
      }
 
 }
@@ -125,9 +128,14 @@ void MainWindow::dadosRecebidos()
 
    auto data = serial.readAll();
    auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
-   if( dados.contains("CORRENTE") ){
 
+  if( dados.contains("CORRENTE") ){
+
+          ui->recebendo_dados->setText("RECEBENDO DADOS!");
          ui->sensor->setText(dados["CORRENTE"].toString());
 
   }
+  else
+      ui->recebendo_dados->setText("NÃO ESTÁ RECEBENDO DADOS!");
+      qDebug()<<(dados["CORRENTE"].toString());
 }

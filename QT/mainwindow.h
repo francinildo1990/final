@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QStringList>
 
+
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QJsonDocument>

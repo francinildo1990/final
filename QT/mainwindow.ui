@@ -396,7 +396,7 @@ background-color: rgb(204, 204, 204);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -421,6 +421,19 @@ background-color: rgb(204, 204, 204);</string>
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="recebendo_dados">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>570</y>
+        <width>201</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
