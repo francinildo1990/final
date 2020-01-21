@@ -11,18 +11,23 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     ui->setupUi(this);
-}
 
-MainWindow::~MainWindow()
-{
-    for(auto p : QSerialPortInfo::availablePorts()){
-              ui->comboBox->addItem(p.portName());
-      }
     connect(&serial,
               SIGNAL(readyRead()),
               this,
               SLOT(dadosRecebidos()));
 
+    for(auto p : QSerialPortInfo::availablePorts()){
+              ui->comboBox->addItem(p.portName());
+      }
+
+    for(auto& item : QSerialPortInfo::standardBaudRates())
+           ui->comboBox_2->addItem(QString::number(item) );
+
+}
+
+MainWindow::~MainWindow()
+{
     delete ui;
 }
 
@@ -33,17 +38,17 @@ void MainWindow::on_ButtonOnOff_1_clicked()
        float dados2;
 
 
-    dados1 = ui-> LabelCorrente1->text().toFloat();
+    dados1 = ui-> sensor->text().toFloat();
     dados2 = ui-> labelCorrente2->text().toFloat();
 
-    if(dados1 <= 0 || dados2 <= 0){  //Verificação dos dados
+    if(dados1 < 0 || dados2 < 0){  //Verificação dos dados
                 qDebug()<<"Dado Inválido"<<endl;
                 QMessageBox::warning(this,"Alerta","Dado inválido");
             }
 
    else
     {
-    corrente.setCorrente1(ui->LabelCorrente1->text().toFloat());
+    corrente.setCorrente1(ui->sensor->text().toFloat());
     corrente.setCorrente2(ui->labelCorrente2->text().toFloat());
 
     int quantidade_linhas = ui->Tabela->rowCount();
@@ -66,7 +71,7 @@ void MainWindow::inserirNaTabela(Dados a, int linha){
 void MainWindow::atualizarEstatisticas()
 {
 
-       ui->Corrente1->setText(QString::number(equipamento.getMaiorCorrente1()));
+       ui->sensor->setText(QString::number(equipamento.getMaiorCorrente1()));
        ui->Corrente2->setText(QString::number(equipamento.getMaiorCorrente2()));
 
 }
@@ -105,7 +110,7 @@ void MainWindow::on_Tabela_cellDoubleClicked(int row, int column)
 void MainWindow::on_CONECTAR_clicked()
 {
     serial.setPortName(ui->comboBox->currentText());
-     serial.setBaudRate(115200);
+    serial.setBaudRate(ui->comboBox_2->currentText().toInt());
 
      if (serial.open(QIODevice::ReadWrite)){
          ui->status->setText("Status: Conectado");
@@ -118,9 +123,9 @@ void MainWindow::dadosRecebidos()
 
    auto data = serial.readAll();
    auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
-  // if( json.contains("CORRENTE") ){
+   if( dados.contains("CORRENTE") ){
 
-         //ui->LabelCorrente1->setText(json["CORRENTE"].toString());
+         ui->sensor->setText(dados["CORRENTE"].toString());
 
-  //}
+  }
 }

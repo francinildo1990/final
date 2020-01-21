@@ -10,10 +10,23 @@
 #define SENSOR A0  // Pino para a leitura do sensor
 #define CALIBRACAO 9.0909090909 // Calibração do sensor
 
-int PINO = D6;
+const String CORRENTE = "\"CORRENTE\":";
+const String RELE = "\"RELE\":";
 
-const int capacity = JSON_OBJECT_SIZE(3);
+
+float Irms ;
+int PINO = D6;
+int DESLIGADO = 0;
+const int capacity = JSON_OBJECT_SIZE(5);
 StaticJsonDocument<capacity> doc;
+
+String JSON_CORRENTE(){ // 
+ int corrente = Irms;
+ 
+    return "{" +
+      CORRENTE + String(corrente) +
+      "}";
+}
 
 const char* SSID = "Liborio Home";
 const char* PASS = "6A3040305F63A633E37233";
@@ -26,44 +39,41 @@ void setup() {
 
   pinMode(PINO, OUTPUT);
   Calcular_Corrente.current(SENSOR, CALIBRACAO); // função da classe EnergyMonitor 
-    Serial.begin(9600);
-  
+    Serial.begin(115200);
 }
 
 void loop() {
 
-float Irms =  Calcular_Corrente.calcIrms(1480);   // Calcula o valor da Corrente 
-
-   doc["CORRENTE"] = Irms;
-
-   if(Irms > 0.1){
-    
-     doc["LED"] = 0 ;
-    }
-    
-    else{
-      
-      doc["LED"] = 1 ;
-      
-    }
+   Irms =  Calcular_Corrente.calcIrms(1480);   // Calcula o valor da Corrente 
+   Serial.print(JSON_CORRENTE());
 
     serializeJson(doc,Serial);
 
     if( Serial.available() > 0 ){
       
    deserializeJson(doc,Serial);
+   Serial.print(JSON_CORRENTE());
    
-   if( doc["LED"] ==1){
-    
-     digitalWrite(PINO, HIGH);
-     
-   }else if ( doc["LED"] == 0){
-    
-     digitalWrite(PINO, LOW);
-   }
- }
+    }
  delay(1000);                      
   
-sensor.teste(Irms);         // Função testar o valor da corrente
-sensor.show(Irms ,TENSAO);  // Função mostrar valores na tela
+
+ doc["CORRENTE"] = Irms ;
+
+   if(Irms < 0.05 && DESLIGADO < 5){
+    
+      doc["RELE"] = 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+     digitalWrite(PINO, LOW);
+     DESLIGADO = 4;
+      
+    }
+    
+    else{
+      doc["RELE"] = 0;
+      digitalWrite(PINO, HIGH);
+      DESLIGADO ++;
+    }
+
+    sensor.teste(Irms);      // Função testar o valor da corrente
+    sensor.show(Irms ,TENSAO);  // Função mostrar valores na tela
 }
