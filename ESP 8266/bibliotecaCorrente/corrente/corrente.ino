@@ -1,5 +1,4 @@
 #include <corrente.h>
-#include <WiFiServer.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
@@ -55,17 +54,17 @@ void loop() {
 
     if( Serial.available() > 0 ){
       
-   deserializeJson(doc,Serial);
+      deserializeJson(doc,Serial);
      //Serial.print(JSON_CORRENTE());
     }
- delay(1000);                      
+                      
   
 
  doc["CORRENTE"] = Irms ;
 
    if(Irms < 0.05 && DESLIGADO < 5){
     
-      doc["RELE"] = 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+      //doc["RELE"] = 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
      digitalWrite(RELE, LOW);
      digitalWrite(EMERGENCY, HIGH);
      
@@ -74,7 +73,7 @@ void loop() {
     }
     
     else{
-      doc["RELE"] = 0;
+      //doc["RELE"] = 0;
       digitalWrite(RELE, HIGH);
        digitalWrite(EMERGENCY, LOW);
       
@@ -83,4 +82,5 @@ void loop() {
 
     sensor.teste(Irms);      // Função testar o valor da corrente
     sensor.show(Irms ,TENSAO);  // Função mostrar valores na tela
+    delay(1000); 
 }

@@ -63,6 +63,7 @@ private:
     void inserirNaTabela(Dados a, int linha);
 
     Dados corrente;
+    QByteArray data;
 
 
 };

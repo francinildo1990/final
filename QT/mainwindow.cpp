@@ -126,16 +126,21 @@ void MainWindow::on_CONECTAR_clicked()
 void MainWindow::dadosRecebidos()
 {
 
-   auto data = serial.readAll();
-   auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
+   data += serial.readAll();
 
-  if( dados.contains("CORRENTE") ){
+   if(data.endsWith("}")){
+       auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
 
-          ui->recebendo_dados->setText("RECEBENDO DADOS!");
-         ui->sensor->setText(dados["CORRENTE"].toString());
+      if( dados.contains("CORRENTE") ){
 
-  }
-  else
-      ui->recebendo_dados->setText("NÃO ESTÁ RECEBENDO DADOS!");
-      qDebug()<<(dados["CORRENTE"].toString());
+              ui->recebendo_dados->setText("RECEBENDO DADOS!");
+             ui->sensor->setText(dados["CORRENTE"].toString());
+
+      }
+      else{
+          ui->recebendo_dados->setText("NÃO ESTÁ RECEBENDO DADOS!");
+       }
+      qDebug()<<data;
+      data = "";
+     }
 }

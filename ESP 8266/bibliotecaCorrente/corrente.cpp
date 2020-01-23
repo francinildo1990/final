@@ -50,19 +50,19 @@ void corrente::show(float a , float b)
          potencia = a * b;  // Calcula o valor da Potencia Instantanea
         }
 
-    Serial.print("Corrente = ");
-    Serial.print(a);
-    Serial.println(" A");
+    //Serial.print("Corrente = ");
+    //Serial.print(a);
+    //Serial.println(" A");
 
-    Serial.print("Potencia = ");
-    Serial.print(potencia);
-    Serial.println(" W");
+    //Serial.print("Potencia = ");
+    //Serial.print(potencia);
+    //Serial.println(" W");
 
     delay(500);
-    Serial.print(".");
+    //Serial.print(".");
     digitalWrite(_LED, HIGH);
     delay(500);
-    Serial.print(".");
+    //Serial.print(".");
     digitalWrite(_LED, LOW);
     delay(500);
 }
