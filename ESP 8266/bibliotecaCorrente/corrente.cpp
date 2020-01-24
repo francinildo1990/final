@@ -2,7 +2,7 @@
 #include"corrente.h"
 
 
-corrente::corrente(int LED_GREEN, int LED_RED, int LED )
+corrente::corrente(int LED_GREEN, int LED_RED, int LED ) // inicializando o constructor
   {
 
   pinMode(LED_GREEN, OUTPUT);
@@ -16,9 +16,9 @@ _LED = LED;
   }
 
 
-void corrente::teste(float a){
+void corrente::teste(float a){  // função recebe o valor da corrente e verifica
 
-  if ( a < 0.1 ){
+  if ( a < 0.06 ){
 
       digitalWrite(_LED_GREEN, HIGH);
       digitalWrite(_LED_RED, LOW);
@@ -33,22 +33,12 @@ void corrente::teste(float a){
 
   }
 
-
-
-
 void corrente::show(float a , float b)
 {
     float potencia;
 
-
-    if ( a < 0.05 ){
-      a = 0;
-      potencia = 0;
-      }
-      else
-      {
          potencia = a * b;  // Calcula o valor da Potencia Instantanea
-        }
+        
 
     //Serial.print("Corrente = ");
     //Serial.print(a);
@@ -60,7 +50,7 @@ void corrente::show(float a , float b)
 
     delay(500);
     //Serial.print(".");
-    digitalWrite(_LED, HIGH);
+    digitalWrite(_LED, HIGH); // led blink
     delay(500);
     //Serial.print(".");
     digitalWrite(_LED, LOW);

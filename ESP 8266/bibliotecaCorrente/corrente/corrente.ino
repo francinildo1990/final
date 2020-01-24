@@ -1,4 +1,4 @@
-#include <corrente.h>
+#include <corrente.h>  // biblioteca que recebe as portas de saída
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
@@ -11,26 +11,17 @@
 
 
 float Irms ;
-int RELE = D6;
+int RELE = D6;          
 int EMERGENCY = D7;
 
-int DESLIGADO = 0;
+int DESLIGADO = 0;  // váriavel auxiliar utilizada para controlar o pico de corrente na inicialização
 
 const int capacity = JSON_OBJECT_SIZE(5);
 StaticJsonDocument<capacity> doc;
 
 
-const char* SSID = "Liborio Home";
-const char* PASS = "6A3040305F63A633E37233";
-const String CORRENTE = "\"CORRENTE\":";
-
-String JSON_CORRENTE(){ // Função que retorna o valor medido pelo sensor MQ-2
- float corrent = Irms;
- 
-    return "{" +
-      CORRENTE + String(corrent) +
-      "}";
-}
+const char* SSID = ""; // endereço da rede
+const char* PASS = ""; // senha de conexão com a rede
 
 corrente sensor(D1,D2,D3); // objeto sensor incializando o constructor
 EnergyMonitor Calcular_Corrente; //objeto para calcular a corrente
@@ -38,33 +29,29 @@ EnergyMonitor Calcular_Corrente; //objeto para calcular a corrente
 void setup() {
 
   pinMode(RELE, OUTPUT);
-  pinMode(EMERGENCY, OUTPUT);
+  pinMode(EMERGENCY, OUTPUT); 
   
   Calcular_Corrente.current(SENSOR, CALIBRACAO); // função da classe EnergyMonitor 
-   Serial.begin(115200);
+   Serial.begin(115200);                        //Velocidade de envio da informação
 }
 
 void loop() {
 
    Irms =  Calcular_Corrente.calcIrms(1480);   // Calcula o valor da Corrente 
    
-  // Serial.print(JSON_CORRENTE());
-   
     serializeJson(doc,Serial);
 
     if( Serial.available() > 0 ){
       
       deserializeJson(doc,Serial);
-     //Serial.print(JSON_CORRENTE());
+    
     }
                       
-  
 
- doc["CORRENTE"] = Irms ;
+    doc["CORRENTE"] = Irms ;
 
-   if(Irms < 0.05 && DESLIGADO < 5){
-    
-      //doc["RELE"] = 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ;
+   if(Irms < 0.06 && DESLIGADO < 5){
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ;
      digitalWrite(RELE, LOW);
      digitalWrite(EMERGENCY, HIGH);
      
@@ -73,7 +60,7 @@ void loop() {
     }
     
     else{
-      //doc["RELE"] = 0;
+      
       digitalWrite(RELE, HIGH);
        digitalWrite(EMERGENCY, LOW);
       

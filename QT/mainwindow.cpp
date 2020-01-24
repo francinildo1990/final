@@ -12,9 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-
-
     connect(&serial,
               SIGNAL(readyRead()),
               this,
@@ -27,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     for(auto& item : QSerialPortInfo::standardBaudRates())
            ui->comboBox_2->addItem(QString::number(item) );
+
+
 
 }
 
@@ -104,10 +103,10 @@ void MainWindow::on_actionCarregar_triggered()
 void MainWindow::on_Tabela_cellDoubleClicked(int row, int column)
 {
     if(column == 0){
-               QMessageBox::warning(this, "Alerta", "Você não pode alterar cadastro!");
+               QMessageBox::warning(this, "Alerta", "Você não pode alterar valor!");
                }
        if(column == 1){
-               QMessageBox::warning(this, "Alerta", "Você não pode alterar cadastro!");
+               QMessageBox::warning(this, "Alerta", "Você não pode alterar valor!");
                }
 }
 
@@ -119,8 +118,10 @@ void MainWindow::on_CONECTAR_clicked()
      if (serial.open(QIODevice::ReadWrite)){
          ui->status->setText("Status: Conectado");
          dadosRecebidos();
+           }
+     else {
+          ui->status->setText("Status: Desconectado");
      }
-
 }
 
 void MainWindow::dadosRecebidos()
@@ -131,16 +132,17 @@ void MainWindow::dadosRecebidos()
    if(data.endsWith("}")){
        auto dados = QJsonDocument::fromJson(data).object().toVariantMap();
 
-      if( dados.contains("CORRENTE") ){
-
-              ui->recebendo_dados->setText("RECEBENDO DADOS!");
+      if( dados.contains("CORRENTE") )
+         {
+             ui->recebendo_dados->setText("RECEBENDO DADOS!");
              ui->sensor->setText(dados["CORRENTE"].toString());
+        }
 
-      }
-      else{
-          ui->recebendo_dados->setText("NÃO ESTÁ RECEBENDO DADOS!");
-       }
       qDebug()<<data;
       data = "";
      }
+   else{
+       ui->recebendo_dados->setText("NÃO ESTÁ RECEBENDO DADOS!");
+        qDebug()<<data;
+    }
 }

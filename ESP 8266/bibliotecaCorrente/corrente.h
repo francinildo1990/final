@@ -1,22 +1,19 @@
 #ifndef CORRENTE_H
  #define CORRENTE_H
 
- #include"Arduino.h"
+ #include"Arduino.h" // inclui biblioteca do arduino
 
 
- class corrente
+ class corrente   // classe corrente
      {
 
       public:
 
 
-          corrente(int LED_GREEN, int LED_RED, int LED );
+          corrente(int LED_GREEN, int LED_RED, int LED ); // pinos de saída dos leds
 
           void teste(float a);
           void show(float a , float b);
-
-
-
 
            int _LED_GREEN;
            int _LED_RED;
