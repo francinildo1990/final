@@ -1,6 +1,6 @@
 # Projeto_Final
 Sistema de segurança para Equipamentos Elétricos
-####Equipe: Francinildo Cardoso e Leandro Silva
+#### Equipe: Francinildo Cardoso e Leandro Silva
         
 
 ##### O presente projeto foi elaborado utilizando a plataforma do QT CREATOR, e tem como finalidade a composição de nota da disciplina técnicas de programação 2019.2
